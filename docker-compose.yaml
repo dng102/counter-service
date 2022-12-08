@@ -1,17 +1,16 @@
-version?: ?'3' 
-services?:
-   machine1?:
-        image?: ?busybox 
-        environment?:
-        - MACHINE=1 
-        entrypoint?: ?sleep 5d
-machine2?:
-        image?: ?busybox 
-        environment?:
-        - MACHINE=2 
-        entrypoint?: ?sleep 5d
-machine3?: 
-        image?: ?busybox 
-        environment?:
-        - MACHINE=2 
-        entrypoint?: ?sleep 5d
+version: '2' 
+networks:
+  app-network:
+    driver: bridge
+
+services:
+  redis:
+    image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    networks:
+      - app-network
+  myapplication:
+    image: 'counter-services'
+    networks:
+      - app-tier
