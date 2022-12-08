@@ -13,4 +13,4 @@ services:
   myapplication:
     image: 'counter-services'
     networks:
-      - app-tier
+      default : null
